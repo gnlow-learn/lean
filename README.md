@@ -74,4 +74,12 @@ simp only [
   evalExpr,
   Int.add_assoc,
 ]
+--
+simp [
+  evalProg,
+  evalExpr,
+  Int.add_assoc,
+]
 ```
+- `simp only`는 명시된 규칙만 사용
+- `simp`는 기본 라이브러리의 `@[simp]` 규칙도 사용
