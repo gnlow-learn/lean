@@ -39,3 +39,8 @@ instance: Add Nat where
 
 ### abbrev
 - alias
+
+### axiom
+```lean
+axiom all_nats_ge_zero (n: Nat): n ≥ 0
+```
