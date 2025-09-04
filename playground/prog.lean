@@ -19,12 +19,11 @@ open Expr List
 theorem multi_move_sound (a b: Int) (pre: Program)
   : evalProg (pre ++ [move a, move b] ++ post)
   = evalProg (pre ++ [move (a+b)] ++ post)
-  := by
-    simp [
-      evalProg,
-      evalExpr,
-      Int.add_assoc,
-    ]
+  := by simp [
+    evalProg,
+    evalExpr,
+    Int.add_assoc,
+  ]
 
 def MyProg := [
   move 10,
