@@ -1,5 +1,5 @@
 inductive Expr where
-  | move (n: Float)
+  | move (n: Int)
 
 instance: ToString Expr where
   toString
@@ -7,15 +7,35 @@ instance: ToString Expr where
 
 abbrev Program := List Expr
 
-def eval (prog: Program) :=
-  prog.foldl (fun (pos: Float) (expr: Expr) =>
-    match expr with
-    | Expr.move n => pos + n
-  ) 0
+def evalExpr (pos: Int) (expr: Expr) :=
+  match expr with
+  | Expr.move n => pos + n
+
+def evalProg (prog: Program) :=
+  prog.foldl evalExpr 0
+
+open Expr List
+
+theorem multi_move_sound (a b: Int) (pre: Program)
+  : evalProg (pre ++ [move a, move b] ++ post)
+  = evalProg (pre ++ [move (a+b)] ++ post)
+  := by
+    unfold evalProg
+    rw [foldl_append]
+    rw [foldl_append]
+    rw [foldl_cons]
+    rw [evalExpr]
+    rw [foldl_cons]
+    rw [evalExpr]
+    rw [foldl_append]
+    rw [foldl_append]
+    rw [foldl_cons]
+    rw [evalExpr]
+    rw [Int.add_assoc]
 
 def MyProg := [
-  Expr.move 10,
-  Expr.move 20,
+  move 10,
+  move 20,
 ]
 
-#eval eval MyProg
+#eval evalProg MyProg
