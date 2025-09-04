@@ -20,11 +20,13 @@ theorem multi_move_sound (a b: Int) (pre: Program)
   : evalProg (pre ++ [move a, move b] ++ post)
   = evalProg (pre ++ [move (a+b)] ++ post)
   := by
-    unfold evalProg
-    repeat rw [foldl_append]
-    repeat rw [foldl_cons]
-    repeat rw [evalExpr]
-    rw [Int.add_assoc]
+    simp only [
+      evalProg,
+      foldl_append,
+      foldl_cons,
+      evalExpr,
+      Int.add_assoc,
+    ]
 
 def MyProg := [
   move 10,

@@ -44,3 +44,34 @@ instance: Add Nat where
 ```lean
 axiom all_nats_ge_zero (n: Nat): n ≥ 0
 ```
+
+## simp
+```lean
+-- playground/prog.lean
+unfold evalProg
+rw [foldl_append]
+rw [foldl_append]
+rw [foldl_cons]
+rw [evalExpr]
+rw [foldl_cons]
+rw [evalExpr]
+rw [foldl_append]
+rw [foldl_append]
+rw [foldl_cons]
+rw [evalExpr]
+rw [Int.add_assoc]
+--
+unfold evalProg
+repeat rw [foldl_append]
+repeat rw [foldl_cons]
+repeat rw [evalExpr]
+rw [Int.add_assoc]
+--
+simp only [
+  evalProg,
+  foldl_append,
+  foldl_cons,
+  evalExpr,
+  Int.add_assoc,
+]
+```
