@@ -83,3 +83,22 @@ simp [
 ```
 - `simp only`는 명시된 규칙만 사용
 - `simp`는 기본 라이브러리의 `@[simp]` 규칙도 사용
+
+## memo
+
+###
+```lean
+def double (x: Nat) := x * 2
+```
+- 내가 생각했던대로 `double (x: Nat): x * 2`가 되진 않는구나
+- `double (x: Nat): Nat`가 됨
+
+###
+```lean
+instance: Bind List where
+  bind l f := List.flatMap f l
+
+#eval [1,2,3] >>= (fun x => [x, x * 2])
+```
+- Bind List 직접 구현해줘야하네
+- 그렇게 해놓은 이유가 있나..?
